@@ -1,0 +1,153 @@
+! AirfoilInfo v1.01.x Input File
+! DTU 10MW 178.3 Blade
+! --- General ---
+DEFAULT                                        InterpOrd                                      ! Interpolation order to use for quasi-steady table lookup {1=linear; 3=cubic spline; "default"} [default=3]
+1                                              NonDimArea                                     ! The non-dimensional area of the airfoil (area/chord^2) (set to 1.0 if unsure or unneeded)
+0                                              NumCoords                                      ! The number of coordinates in the airfoil shape file.  Set to zero if coordinates not included.
+"BL.inp"                                       BL_file                                        ! The file name including the boundary layer characteristics of the profile. Ignored if the aeroacoustic module is not called.
+1                                              NumTabs                                        ! Number of airfoil tables in this file.  Each table must have lines for Re and Ctrl.
+! --- Data for table 1 ---
+0.75                                           Re                                             ! Reynolds number in millions
+0                                              Ctrl                                           ! Control setting (must be 0 for current AirfoilInfo)
+True                                           InclUAdata                                     ! Is unsteady aerodynamics data included in this table? If TRUE, then include 30 UA coefficients below this line
+-2.2136                                        alpha0                                         ! 0-lift angle of attack, depends on airfoil.
+12.07                                          alpha1                                         ! Angle of attack at f=0.7, (approximately the stall angle) for AOA>alpha0. (deg)
+-7.9029                                        alpha2                                         ! Angle of attack at f=0.7, (approximately the stall angle) for AOA<alpha0. (deg)
+1                                              eta_e                                          ! Recovery factor in the range [0.85 - 0.95] used only for UAMOD=1, it is set to 1 in the code when flookup=True. (-)
+7.6482                                         C_nalpha                                       ! Slope of the 2D normal force coefficient curve. (1/rad)
+DEFAULT                                        T_f0                                           ! Initial value of the time constant associated with Df in the expression of Df and f''. [default = 3]
+DEFAULT                                        T_V0                                           ! Initial value of the time constant associated with the vortex lift decay process; it is used in the expression of Cvn. It depends on Re,M, and airfoil class. [default = 6]
+DEFAULT                                        T_p                                            ! Boundary-layer,leading edge pressure gradient time constant in the expression of Dp. It should be tuned based on airfoil experimental data. [default = 1.7]
+DEFAULT                                        T_VL                                           ! Initial value of the time constant associated with the vortex advection process; it represents the non-dimensional time in semi-chords, needed for a vortex to travel from LE to trailing edge (TE); it is used in the expression of Cvn. It depends on Re, M (weakly), and airfoil. [valid range = 6 - 13, default = 11]
+DEFAULT                                        b1                                             ! Constant in the expression of phi_alpha^c and phi_q^c.  This value is relatively insensitive for thin airfoils, but may be different for turbine airfoils. [from experimental results, defaults to 0.14]
+DEFAULT                                        b2                                             ! Constant in the expression of phi_alpha^c and phi_q^c.  This value is relatively insensitive for thin airfoils, but may be different for turbine airfoils. [from experimental results, defaults to 0.53]
+DEFAULT                                        b5                                             ! Constant in the expression of K'''_q,Cm_q^nc, and k_m,q.  [from  experimental results, defaults to 5]
+DEFAULT                                        A1                                             ! Constant in the expression of phi_alpha^c and phi_q^c.  This value is relatively insensitive for thin airfoils, but may be different for turbine airfoils. [from experimental results, defaults to 0.3]
+DEFAULT                                        A2                                             ! Constant in the expression of phi_alpha^c and phi_q^c.  This value is relatively insensitive for thin airfoils, but may be different for turbine airfoils. [from experimental results, defaults to 0.7]
+DEFAULT                                        A5                                             ! Constant in the expression of K'''_q,Cm_q^nc, and k_m,q. [from experimental results, defaults to 1]
+0                                              S1                                             ! Constant in the f curve best-fit for alpha0<=AOA<=alpha1; by definition it depends on the airfoil. [ignored if UAMod<>1]
+0                                              S2                                             ! Constant in the f curve best-fit for         AOA> alpha1; by definition it depends on the airfoil. [ignored if UAMod<>1]
+0                                              S3                                             ! Constant in the f curve best-fit for alpha2<=AOA< alpha0; by definition it depends on the airfoil. [ignored if UAMod<>1]
+0                                              S4                                             ! Constant in the f curve best-fit for         AOA< alpha2; by definition it depends on the airfoil. [ignored if UAMod<>1]
+1.6857                                         Cn1                                            ! Critical value of C0n at leading edge separation. It should be extracted from airfoil data at a given Mach and Reynolds number. It can be calculated from the static value of Cn at either the break in the pitching moment or the loss of chord force at the onset of stall. It is close to the condition of maximum lift of the airfoil at low Mach numbers.
+-1.2885                                        Cn2                                            ! As Cn1 for negative AOAs.
+DEFAULT                                        St_sh                                          ! Strouhal's shedding frequency constant.  [default = 0.19]
+0.013                                          Cd0                                            ! 2D drag coefficient value at 0-lift.
+-0.0701                                        Cm0                                            ! 2D pitching moment coefficient about 1/4-chord location, at 0-lift, positive if nose up. [If the aerodynamics coefficients table does not include a column for Cm, this needs to be set to 0.0]
+0                                              k0                                             ! Constant in the \hat(x)_cp curve best-fit; = (\hat(x)_AC-0.25).  [ignored if UAMod<>1]
+0                                              k1                                             ! Constant in the \hat(x)_cp curve best-fit.  [ignored if UAMod<>1]
+0                                              k2                                             ! Constant in the \hat(x)_cp curve best-fit.  [ignored if UAMod<>1]
+0                                              k3                                             ! Constant in the \hat(x)_cp curve best-fit.  [ignored if UAMod<>1]
+0                                              k1_hat                                         ! Constant in the expression of Cc due to leading edge vortex effects.  [ignored if UAMod<>1]
+DEFAULT                                        x_cp_bar                                       ! Constant in the expression of \hat(x)_cp^v. [ignored if UAMod<>1, default = 0.2]
+DEFAULT                                        UACutout                                       ! Angle of attack above which unsteady aerodynamics are disabled (deg). [Specifying the string "Default" sets UACutout to 45 degrees]
+DEFAULT                                        filtCutOff                                     ! Cut-off frequency (-3 dB corner frequency) for low-pass filtering the AoA input to UA, as well as the 1st and 2nd derivatives (Hz) [default = 20]
+! --- Table of aerodynamics coefficients ---
+105                                            NumAlf                                         ! Number of data lines in the following table
+!                                              Alpha                                          Cl                                             Cd                                             Cm
+!                                              (deg)                                          (-)                                            (-)                                            (-)
+                                               -180                                           0                                              0                                              0
+                                               -175                                           0.1736                                         0.0099                                         0.0218
+                                               -170                                           0.342                                          0.0392                                         0.0434
+                                               -165                                           0.5                                            0.0871                                         0.0647
+                                               -160                                           0.6428                                         0.1521                                         0.0855
+                                               -155                                           0.766                                          0.2322                                         0.1057
+                                               -150                                           0.866                                          0.325                                          0.125
+                                               -145                                           0.9397                                         0.4277                                         0.1434
+                                               -140                                           0.9848                                         0.5371                                         0.1607
+                                               -135                                           1                                              0.65                                           0.1768
+                                               -130                                           0.9848                                         0.7629                                         0.1915
+                                               -125                                           0.9397                                         0.8723                                         0.2048
+                                               -120                                           0.866                                          0.975                                          0.2165
+                                               -115                                           0.766                                          1.068                                          0.2266
+                                               -110                                           0.6428                                         1.148                                          0.2349
+                                               -105                                           0.5                                            1.213                                          0.2415
+                                               -100                                           0.342                                          1.261                                          0.2462
+                                               -95                                            0.1736                                         1.29                                           0.249
+                                               -90                                            0                                              1.3                                            0.25
+                                               -85                                            -0.1736                                        1.29                                           0.249
+                                               -80                                            -0.342                                         1.261                                          0.2462
+                                               -75                                            -0.5                                           1.213                                          0.2415
+                                               -70                                            -0.6428                                        1.148                                          0.2349
+                                               -65                                            -0.766                                         1.068                                          0.2266
+                                               -60                                            -0.866                                         0.975                                          0.2165
+                                               -55                                            -0.9397                                        0.8723                                         0.2048
+                                               -50                                            -0.9848                                        0.7629                                         0.1915
+                                               -45                                            -1                                             0.65                                           0.1768
+                                               -40                                            -1.022                                         0.5352                                         0.1416
+                                               -39                                            -1.024                                         0.5066                                         0.1346
+                                               -38                                            -1.016                                         0.4851                                         0.1276
+                                               -37                                            -1.018                                         0.4565                                         0.1205
+                                               -36                                            -1.011                                         0.4279                                         0.1135
+                                               -35                                            -1.003                                         0.3994                                         0.0965
+                                               -34                                            -0.9954                                        0.3708                                         0.0794
+                                               -33                                            -0.9877                                        0.3353                                         0.0624
+                                               -32                                            -0.9835                                        0.3097                                         0.0515
+                                               -30                                            -0.9703                                        0.2663                                         0.0389
+                                               -28                                            -0.9672                                        0.2229                                         0.0263
+                                               -26                                            -0.9441                                        0.1941                                         0.0154
+                                               -24                                            -0.931                                         0.1654                                         0.0045
+                                               -22                                            -0.9047                                        0.1417                                         -0.0039
+                                               -20                                            -0.8784                                        0.1181                                         -0.0123
+                                               -18                                            -0.8459                                        0.0986                                         -0.0175
+                                               -16                                            -0.8134                                        0.0792                                         -0.0227
+                                               -14                                            -0.7728                                        0.0643                                         -0.0235
+                                               -12                                            -0.7322                                        0.0495                                         -0.0244
+                                               -10                                            -0.6935                                        0.0381                                         -0.0227
+                                               -8                                             -0.6547                                        0.0267                                         -0.021
+                                               -6                                             -0.4507                                        0.0204                                         -0.0389
+                                               -4                                             -0.2467                                        0.014                                          -0.0569
+                                               -2                                             0.0295                                         0.0129                                         -0.0717
+                                               0                                              0.3056                                         0.0118                                         -0.0865
+                                               2                                              0.567                                          0.0119                                         -0.0954
+                                               4                                              0.8199                                         0.0125                                         -0.1024
+                                               6                                              1.061                                          0.0136                                         -0.1071
+                                               8                                              1.287                                          0.0152                                         -0.1094
+                                               10                                             1.484                                          0.018                                          -0.108
+                                               12                                             1.639                                          0.0224                                         -0.1026
+                                               14                                             1.733                                          0.0303                                         -0.09524
+                                               16                                             1.714                                          0.0539                                         -0.09104
+                                               18                                             1.683                                          0.0954                                         -0.09794
+                                               20                                             1.657                                          0.1435                                         -0.1103
+                                               22                                             1.644                                          0.228                                          -0.13
+                                               24                                             1.633                                          0.3148                                         -0.1533
+                                               26                                             1.633                                          0.3926                                         -0.176
+                                               28                                             1.617                                          0.4623                                         -0.1966
+                                               30                                             1.597                                          0.5266                                         -0.2149
+                                               32                                             1.571                                          0.5855                                         -0.2313
+                                               33                                             1.576                                          0.6215                                         -0.2366
+                                               34                                             1.557                                          0.6562                                         -0.2406
+                                               35                                             1.548                                          0.6897                                         -0.2447
+                                               36                                             1.527                                          0.7148                                         -0.2487
+                                               37                                             1.526                                          0.7464                                         -0.2496
+                                               38                                             1.514                                          0.7762                                         -0.2455
+                                               39                                             1.492                                          0.7982                                         -0.2444
+                                               40                                             1.46                                           0.8197                                         -0.2423
+                                               45                                             1.295                                          0.9122                                         -0.2373
+                                               50                                             1.126                                          0.9665                                         -0.2354
+                                               55                                             0.9808                                         0.9957                                         -0.2324
+                                               60                                             0.866                                          1.035                                          -0.2335
+                                               65                                             0.766                                          1.083                                          -0.2336
+                                               70                                             0.6428                                         1.148                                          -0.2349
+                                               75                                             0.5                                            1.213                                          -0.2415
+                                               80                                             0.342                                          1.261                                          -0.2462
+                                               85                                             0.1736                                         1.29                                           -0.249
+                                               90                                             0                                              1.3                                            -0.25
+                                               95                                             -0.1736                                        1.29                                           -0.249
+                                               100                                            -0.342                                         1.261                                          -0.2462
+                                               105                                            -0.5                                           1.213                                          -0.2415
+                                               110                                            -0.6428                                        1.148                                          -0.2349
+                                               115                                            -0.766                                         1.068                                          -0.2266
+                                               120                                            -0.866                                         0.975                                          -0.2165
+                                               125                                            -0.9397                                        0.8723                                         -0.2048
+                                               130                                            -0.9848                                        0.7629                                         -0.1915
+                                               135                                            -1                                             0.65                                           -0.1768
+                                               140                                            -0.9848                                        0.5371                                         -0.1607
+                                               145                                            -0.9397                                        0.4277                                         -0.1434
+                                               150                                            -0.866                                         0.325                                          -0.125
+                                               155                                            -0.766                                         0.2322                                         -0.1057
+                                               160                                            -0.6428                                        0.1521                                         -0.0855
+                                               165                                            -0.5                                           0.0871                                         -0.0647
+                                               170                                            -0.342                                         0.0392                                         -0.0434
+                                               175                                            -0.1736                                        0.0099                                         -0.0218
+                                               180                                            0                                              0                                              0
