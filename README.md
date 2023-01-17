@@ -6,8 +6,8 @@ This repository contains FAST.Farm inputs files for NREL's 10-turbine shared-moo
 - SteadyWind: inputs for a FAST.Farm run using steady inflow wind
 
 Please reference the following for detailed information on the design and analysis of this shared-mooring array:
--E. Lozon and M. Hall, “Coupled Loads Analysis of a Novel Shared-Mooring Floating Wind Farm,” Applied Energy, 2022. https://doi.org/10.1016/j.apenergy.2022.120513.
--M. Hall; E. Lozon; S. Housner; S. Sirnivas. “Design and Analysis of a Ten-Turbine Floating Wind Farm with Shared Mooring Lines.” Journal of Physics: Conference Series vol. 2362, 2022. https://doi.org/10.1088/1742-6596/2362/1/012016.
+- E. Lozon and M. Hall, “Coupled Loads Analysis of a Novel Shared-Mooring Floating Wind Farm,” Applied Energy, 2022. https://doi.org/10.1016/j.apenergy.2022.120513.
+- M. Hall; E. Lozon; S. Housner; S. Sirnivas. “Design and Analysis of a Ten-Turbine Floating Wind Farm with Shared Mooring Lines.” Journal of Physics: Conference Series vol. 2362, 2022. https://doi.org/10.1088/1742-6596/2362/1/012016.
 
 Changes from the input files used in the paper include the following:
 - TurbSim Low resolution and high resolution grid sizing, and grid sizing in the farm.fstf file were changed based on guidance from https://github.com/OpenFAST/python-toolbox/tree/main/pyFAST/fastfarm.
