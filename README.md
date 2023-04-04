@@ -17,4 +17,4 @@ Changes from the input files used in the paper include the following:
 	- High resolution grid spacing changed from 15 m to 5 m
 	- TurbSim time step changed from 0.5 s to 0.1 s
 - Simulation length for the TurbulentWind case changed from 4600 seconds to 600 seconds. 
-- Open.FAST API changes from OpenFAST v3.0.0 to v3.3.0. See https://openfast.readthedocs.io/en/main/source/user/api_change.html for more information.
+- Open.FAST API changes from OpenFAST v3.0.0 to v3.4.1. See https://openfast.readthedocs.io/en/main/source/user/api_change.html for more information.
